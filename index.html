@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LobbyingData.com</title>
+    <meta name="author" content="Neil Bhatia">
+    <meta content="Display any CSV file as a searchable, filterable, pretty HTML table">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <main class="row">
+            <div class="col">
+                <h1>LobbyingData.com - Daily Lobbying Data</h1>
+
+                <p> Here's a table by LobbyingData.com sourced originally from the  <a href="https://lda.senate.gov/api/redoc/v1/#section/About-the-REST-API">Senate Office of Public Records</a>.</p>
+                <p>Click the link below to download your daily lobbying data. <a
+                        href="http://lobbyingdata.com">Learn More</a>.</p>
+
+                <div id="table-container"></div>
+
+              
+            </div>
+        </main>
+        <footer class="row">
+            <div class="col">
+                <hr>
+                <p class="text-right"><a href="https://lobbyingdata.com/product/daily-lobbying-data/">Daily Lobbying Data</a> by
+                    <a href="http://lobbyingdata.com">LobbyingData.com</a></p>
+            </div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.csv.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="js/csv_to_html_table.js"></script>
+
+    <script>
+        function format_link(link) {
+            if (link)
+                return "<a href='" + link + "' target='_blank'>" + link + "</a>";
+            else return "";
+        }
+
+
+        CsvToHtmlTable.init({
+            csv_path: "data/lobby_data.csv",
+            element: "table-container",
+            allow_download: true,
+            csv_options: {
+                separator: ",",
+                delimiter: '"'
+            },
+            datatables_options: {
+
+                paging: true,
+                buttons: ['colvis']
+        
+
+            },
+            custom_formatting: [
+                [0, format_link]
+            ]
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>
